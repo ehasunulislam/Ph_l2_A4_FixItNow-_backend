@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import config from "./config";
 import cookieParser from "cookie-parser";
+import { globalErrorHandler } from "./middleware/globalError.middlware";
 
 
 
@@ -22,5 +23,14 @@ app.use(cookieParser());
 app.get("/", async (req: Request, res: Response) => {
   res.send("hello, world");
 });
+
+
+// user route
+app.use("/api/users")
+
+
+
+// global error
+app.use(globalErrorHandler)
 
 export default app;
