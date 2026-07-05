@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import { globalErrorHandler } from "./middleware/globalError.middlware";
 import { userRoutes } from "./modules/user/user.routes";
 import { notRouteFound } from "./middleware/notRouteFound.middleware";
+import { authRouter } from "./modules/auth/auth.route";
 
 
 
@@ -29,6 +30,8 @@ app.get("/", async (req: Request, res: Response) => {
 
 // user route
 app.use("/api/users", userRoutes);
+
+app.use("/api/auth", authRouter)
 
 
 // global error
