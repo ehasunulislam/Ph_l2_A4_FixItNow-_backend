@@ -3,6 +3,7 @@ import cors from "cors";
 import config from "./config";
 import cookieParser from "cookie-parser";
 import { globalErrorHandler } from "./middleware/globalError.middlware";
+import { userRoutes } from "./modules/user/user.routes";
 
 
 
@@ -26,8 +27,7 @@ app.get("/", async (req: Request, res: Response) => {
 
 
 // user route
-app.use("/api/users")
-
+app.use("/api/users", userRoutes)
 
 
 // global error
