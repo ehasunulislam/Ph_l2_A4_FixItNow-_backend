@@ -4,6 +4,7 @@ import config from "./config";
 import cookieParser from "cookie-parser";
 import { globalErrorHandler } from "./middleware/globalError.middlware";
 import { userRoutes } from "./modules/user/user.routes";
+import { notRouteFound } from "./middleware/notRouteFound.middleware";
 
 
 
@@ -27,10 +28,13 @@ app.get("/", async (req: Request, res: Response) => {
 
 
 // user route
-app.use("/api/users", userRoutes)
+app.use("/api/users", userRoutes);
 
 
 // global error
-app.use(globalErrorHandler)
+app.use(globalErrorHandler);
+
+// roter not found api
+app.use(notRouteFound);
 
 export default app;
