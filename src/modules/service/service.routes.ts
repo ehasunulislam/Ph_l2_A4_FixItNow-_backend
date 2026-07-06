@@ -12,4 +12,8 @@ router.post("/", authMiddlware.auth(UserRole.TECHNICIAN), serviceController.crea
 // get all ervice
 router.get("/", serviceController.getAllServices);
 
+
+// update the service
+router.patch("/:id", authMiddlware.auth(UserRole.TECHNICIAN), serviceController.updateService);
+
 export const serviceRouter = router

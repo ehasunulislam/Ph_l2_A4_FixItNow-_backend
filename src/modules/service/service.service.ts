@@ -1,6 +1,6 @@
 import { title } from "node:process";
 import { prisma } from "../../lib/prisma"
-import { IServicePayload } from "./service.interface"
+import { IServicePayload, IUpdateServicePayload } from "./service.interface"
 
 // post create service 
 const createServiceFromDB = async(userId: string, payload: IServicePayload) => {
@@ -64,7 +64,46 @@ const getAllServicesFromDB = async () => {
   return services;
 };
 
+
+// update the service
+const updateServiceFromDB = async (serviceId: string, payload: IUpdateServicePayload) => {
+  const service = await prisma.service.findUnique({
+    where: {
+      id: serviceId,
+    },
+  });
+
+  if (!service) {
+    throw new Error("Service not found");
+  }
+
+  if (payload.categoryId) {
+    const category = await prisma.category.findUnique({
+      where: {
+        id: payload.categoryId,
+      },
+    });
+
+    if (!category) {
+      throw new Error("Category not found");
+    }
+  }
+
+  const result = await prisma.service.update({
+    where: {
+      id: serviceId,
+    },
+    data: payload,
+    include: {
+      category: true,
+    },
+  });
+
+  return result;
+};
+
 export const Service = {
     createServiceFromDB,
-    getAllServicesFromDB
+    getAllServicesFromDB,
+    updateServiceFromDB
 }
