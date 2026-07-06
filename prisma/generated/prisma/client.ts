@@ -52,6 +52,11 @@ export type Category = Prisma.CategoryModel
  */
 export type TechnicianProfile = Prisma.TechnicianProfileModel
 /**
+ * Model Service
+ * 
+ */
+export type Service = Prisma.ServiceModel
+/**
  * Model User
  * 
  */

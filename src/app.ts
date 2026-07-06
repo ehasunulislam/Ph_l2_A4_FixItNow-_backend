@@ -8,6 +8,7 @@ import { notRouteFound } from "./middleware/notRouteFound.middleware";
 import { authRouter } from "./modules/auth/auth.route";
 import { technicianRouter } from "./modules/technician/technician.routes";
 import { categoryRouter } from "./modules/category/category.routes";
+import { serviceRouter } from "./modules/service/service.routes";
 
 
 const app: Application = express();
@@ -37,6 +38,8 @@ app.use("/api/auth", authRouter);
 app.use("/api/technician", technicianRouter);
 
 app.use("/api/categories", categoryRouter);
+
+app.use("/api/services", serviceRouter)
 
 
 // global error
