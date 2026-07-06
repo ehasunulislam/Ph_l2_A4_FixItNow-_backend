@@ -384,6 +384,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
+  TechnicianProfile: 'TechnicianProfile',
   User: 'User'
 } as const
 
@@ -400,10 +401,84 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user"
+    modelProps: "technicianProfile" | "user"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
+    TechnicianProfile: {
+      payload: Prisma.$TechnicianProfilePayload<ExtArgs>
+      fields: Prisma.TechnicianProfileFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TechnicianProfileFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TechnicianProfilePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TechnicianProfileFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TechnicianProfilePayload>
+        }
+        findFirst: {
+          args: Prisma.TechnicianProfileFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TechnicianProfilePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TechnicianProfileFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TechnicianProfilePayload>
+        }
+        findMany: {
+          args: Prisma.TechnicianProfileFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TechnicianProfilePayload>[]
+        }
+        create: {
+          args: Prisma.TechnicianProfileCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TechnicianProfilePayload>
+        }
+        createMany: {
+          args: Prisma.TechnicianProfileCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TechnicianProfileCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TechnicianProfilePayload>[]
+        }
+        delete: {
+          args: Prisma.TechnicianProfileDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TechnicianProfilePayload>
+        }
+        update: {
+          args: Prisma.TechnicianProfileUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TechnicianProfilePayload>
+        }
+        deleteMany: {
+          args: Prisma.TechnicianProfileDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TechnicianProfileUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TechnicianProfileUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TechnicianProfilePayload>[]
+        }
+        upsert: {
+          args: Prisma.TechnicianProfileUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TechnicianProfilePayload>
+        }
+        aggregate: {
+          args: Prisma.TechnicianProfileAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTechnicianProfile>
+        }
+        groupBy: {
+          args: Prisma.TechnicianProfileGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TechnicianProfileGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TechnicianProfileCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TechnicianProfileCountAggregateOutputType> | number
+        }
+      }
+    }
     User: {
       payload: Prisma.$UserPayload<ExtArgs>
       fields: Prisma.UserFieldRefs
@@ -517,6 +592,23 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const TechnicianProfileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  bio: 'bio',
+  experience: 'experience',
+  hourlyRate: 'hourlyRate',
+  location: 'location',
+  averageRating: 'averageRating',
+  totalReviews: 'totalReviews',
+  isVerified: 'isVerified',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TechnicianProfileScalarFieldEnum = (typeof TechnicianProfileScalarFieldEnum)[keyof typeof TechnicianProfileScalarFieldEnum]
+
+
 export const UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -579,6 +671,55 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
+ * Reference to a field of type 'Int'
+ */
+export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+/**
+ * Reference to a field of type 'Int[]'
+ */
+export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Decimal'
+ */
+export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+/**
+ * Reference to a field of type 'Decimal[]'
+ */
+export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
+ * Reference to a field of type 'DateTime'
+ */
+export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+/**
+ * Reference to a field of type 'DateTime[]'
+ */
+export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
  * Reference to a field of type 'UserRole'
  */
 export type EnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole'>
@@ -607,30 +748,16 @@ export type ListEnumUserStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$P
 
 
 /**
- * Reference to a field of type 'DateTime'
+ * Reference to a field of type 'Float'
  */
-export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
 
 /**
- * Reference to a field of type 'DateTime[]'
+ * Reference to a field of type 'Float[]'
  */
-export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
-
-
-/**
- * Reference to a field of type 'Int'
- */
-export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-/**
- * Reference to a field of type 'Int[]'
- */
-export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 /**
@@ -743,6 +870,7 @@ export type PrismaClientOptions = ({
   queryPlanCacheMaxSize?: number
 }
 export type GlobalOmitConfig = {
+  technicianProfile?: Prisma.TechnicianProfileOmit
   user?: Prisma.UserOmit
 }
 
