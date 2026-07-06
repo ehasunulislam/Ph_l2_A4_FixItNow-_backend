@@ -15,6 +15,7 @@ model TechnicianProfile {
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   services Service[]
+  availability  Availability[]
 
   @@map("technician_profiles")
 }

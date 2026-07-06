@@ -1,2 +1,3 @@
 <!-- schema -->
-Service  -  Booking  - I
+Service        -   Booking     - I
+Availability   -   Booking     -  I
