@@ -102,8 +102,31 @@ const updateServiceFromDB = async (serviceId: string, payload: IUpdateServicePay
   return result;
 };
 
+
+// delete the service
+const deleteServiceFromDB = async (serviceId: string) => {
+  const service = await prisma.service.findUnique({
+    where: {
+      id: serviceId,
+    },
+  });
+
+  if (!service) {
+    throw new Error("Service not found");
+  }
+
+  await prisma.service.delete({
+    where: {
+      id: serviceId,
+    },
+  });
+
+  return null;
+};
+
 export const Service = {
     createServiceFromDB,
     getAllServicesFromDB,
-    updateServiceFromDB
+    updateServiceFromDB,
+    deleteServiceFromDB
 }

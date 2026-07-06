@@ -16,4 +16,9 @@ router.get("/", serviceController.getAllServices);
 // update the service
 router.patch("/:id", authMiddlware.auth(UserRole.TECHNICIAN), serviceController.updateService);
 
+
+// delete the service
+router.delete( "/:id", authMiddlware.auth(UserRole.TECHNICIAN), serviceController.deleteService);
+
+
 export const serviceRouter = router
