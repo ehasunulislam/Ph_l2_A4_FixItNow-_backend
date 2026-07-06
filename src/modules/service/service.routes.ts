@@ -8,4 +8,8 @@ const router = Router();
 // post create service 
 router.post("/", authMiddlware.auth(UserRole.TECHNICIAN), serviceController.createService);
 
+
+// get all ervice
+router.get("/", serviceController.getAllServices);
+
 export const serviceRouter = router

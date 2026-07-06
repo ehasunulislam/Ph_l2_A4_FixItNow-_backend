@@ -41,6 +41,30 @@ const createServiceFromDB = async(userId: string, payload: IServicePayload) => {
     return service
 }
 
+// get all services
+const getAllServicesFromDB = async () => {
+  const services = await prisma.service.findMany({
+    include: {
+      category: true,
+      technicianProfile: {
+        include: {
+          user: {
+            omit: {
+              password: true,
+            },
+          },
+        },
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return services;
+};
+
 export const Service = {
-    createServiceFromDB
+    createServiceFromDB,
+    getAllServicesFromDB
 }
