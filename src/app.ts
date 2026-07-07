@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 import { globalErrorHandler } from "./middleware/globalError.middlware";
 import { userRoutes } from "./modules/user/user.routes";
 import { notRouteFound } from "./middleware/notRouteFound.middleware";
-import { authRouter } from "./modules/auth/auth.route";
+import { authRouter } from "./modules/auth/auth.routes";
 import { technicianRouter } from "./modules/technician/technician.routes";
 import { categoryRouter } from "./modules/category/category.routes";
 import { serviceRouter } from "./modules/service/service.routes";
