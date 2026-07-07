@@ -48,7 +48,22 @@ const getSingleTechnicianProfileById = catchAsync(async(req: Request, res: Respo
         getSIngleProfile
       },
     });
-})
+});
+
+
+// get the technician's all booking 
+const getTechnicianBookings = catchAsync(async (req, res) => {
+    const id = req.user?.id as string;
+
+    const bookings = await techicianService.getTechnicianBookingsFromDB(id);
+
+    sendResponse(res, {
+        success: true,
+        statusCode: httpStatus.OK,
+        message: "Technician bookings retrieved successfully",
+        data: bookings,
+    });
+});
 
 
 // update TechnicianProfile controller
@@ -73,5 +88,6 @@ export const technicianController = {
     getTechnicianProfile,
     getAllTechnicianProfile,
     getSingleTechnicianProfileById,
-    updateTechnicianProfile
+    getTechnicianBookings,
+    updateTechnicianProfile,
 }

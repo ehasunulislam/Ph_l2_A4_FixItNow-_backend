@@ -21,7 +21,6 @@ const getTechnicianProfileFromDB = async(userId: string) => {
 };
 
 
-
 // get all Technician 
 const getAllTechnicianProfileFromDB = async(filter: any) => {
     const { searchTerm, location, type} = filter;
@@ -96,6 +95,43 @@ const getSingleTechnicianProfileByIdFromDB  = async(userId: string) => {
 }
 
 
+// get the technician's all booking 
+const getTechnicianBookingsFromDB = async (userId: string) => {
+    const technician = await prisma.technicianProfile.findUnique({
+        where: {
+            userId,
+        },
+    });
+
+    if (!technician) {
+        throw new Error("Technician profile not found");
+    }
+
+    const bookings = await prisma.booking.findMany({
+        where: {
+            technicianProfileId: technician.id,
+        },
+        include: {
+            customer: {
+                omit: {
+                    password: true,
+                },
+            },
+            service: {
+                include: {
+                    category: true,
+                },
+            },
+            availability: true,
+        },
+        orderBy: {
+            createdAt: "desc",
+        },
+    });
+
+    return bookings;
+};
+
 
 // update TechnicianProfile service 
 const updateTechnicianProfileIntoDB  = async(userId: string, payload: ITechnicianProfilePayload) => {
@@ -121,5 +157,6 @@ export const techicianService = {
     getTechnicianProfileFromDB,
     getAllTechnicianProfileFromDB,
     getSingleTechnicianProfileByIdFromDB,
+    getTechnicianBookingsFromDB,
     updateTechnicianProfileIntoDB
 }

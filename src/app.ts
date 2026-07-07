@@ -33,6 +33,7 @@ app.get("/", async (req: Request, res: Response) => {
 
 app.use("/api/auth", authRouter);
 
+// technician routers
 app.use("/api/technicians", technicianRouter);
 app.use("/api/technicians", availabilityRouter);
 
