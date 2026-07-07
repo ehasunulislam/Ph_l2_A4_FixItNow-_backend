@@ -6,8 +6,7 @@ import httpStatus from "http-status";
 
 
 
-const createUser = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {
+const createUser = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const payload = req.body;
 
     const user = await authService.createUserFromDB(payload);
@@ -17,7 +16,7 @@ const createUser = catchAsync(
       statusCode: httpStatus.CREATED,
       message: "User registered successfully",
       data: {
-        user,
+        user
       },
     });
   },
