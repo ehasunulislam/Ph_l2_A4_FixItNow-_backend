@@ -52,7 +52,7 @@ const getSingleTechnicianProfileById = catchAsync(async(req: Request, res: Respo
 
 
 // get the technician's all booking 
-const getTechnicianBookings = catchAsync(async (req, res) => {
+const getTechnicianBookings = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const id = req.user?.id as string;
 
     const bookings = await techicianService.getTechnicianBookingsFromDB(id);
@@ -64,6 +64,25 @@ const getTechnicianBookings = catchAsync(async (req, res) => {
         data: bookings,
     });
 });
+
+
+// get the technician's booking -> update
+const updateBookingStatus = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.user?.id as string;
+    const bookingId = req.params.id as string;
+    const payload = req.body;
+
+    const updatedBooking = await techicianService.updateBookStausFromDB(userId, bookingId, payload);
+
+    sendResponse(res, {
+        success: true,
+        statusCode: httpStatus.OK,
+        message: "Booking status updated successfully",
+        data: {
+            updatedBooking
+        }
+    });
+})
 
 
 // update TechnicianProfile controller
@@ -89,5 +108,6 @@ export const technicianController = {
     getAllTechnicianProfile,
     getSingleTechnicianProfileById,
     getTechnicianBookings,
+    updateBookingStatus,
     updateTechnicianProfile,
 }

@@ -1,5 +1,6 @@
+import { BookingStatus } from "../../../prisma/generated/prisma/enums";
 import { prisma } from "../../lib/prisma"
-import { ITechnicianProfilePayload } from "./technician.interfece";
+import { ITechnicianProfilePayload, IUpdateBookingStatus } from "./technician.interfece";
 
 
 // getTechnicianProfile service
@@ -133,6 +134,69 @@ const getTechnicianBookingsFromDB = async (userId: string) => {
 };
 
 
+// get the technician's booking -> update
+const updateBookStausFromDB = async(userId: string, bookingId: string, payload: IUpdateBookingStatus) => {
+    const technician = await prisma.technicianProfile.findUnique({
+        where: {
+            userId
+        }
+    });
+
+    if (!technician) {
+        throw new Error("Technician profile not found");
+    }
+
+    const booking = await prisma.booking.findUnique({
+        where: {
+            id: bookingId
+        }
+    });
+
+    if (!booking) {
+        throw new Error("Booking not found");
+    }
+
+    // check own book id 
+    if(booking.technicianProfileId !== technician.id) {
+        throw new Error("You are not authorized to update this booking");
+    }
+
+    // if REQUESTED status is not available then it can not be updated
+    if(booking.status !== BookingStatus.REQUESTED) {
+        throw new Error("Booking has already been processed");
+    }
+
+    // if status is ACCEPTED  or DECLINED
+    if(payload.status !== BookingStatus.ACCEPTED && payload.status !== BookingStatus.DECLINED) {
+        throw new Error("Invalid booking status");
+    }
+
+    const updatedBooking = await prisma.booking.update({
+        where: {
+            id: bookingId
+        },
+        data: {
+            status: payload.status
+        },
+        include: {
+            customer: {
+                omit: {
+                    password: true
+                }
+            },
+            service: {
+                include: {
+                    category: true
+                }
+            },
+            availability: true
+        }
+    });
+
+    return updatedBooking
+}
+
+
 // update TechnicianProfile service 
 const updateTechnicianProfileIntoDB  = async(userId: string, payload: ITechnicianProfilePayload) => {
     const profile = await prisma.technicianProfile.update({
@@ -158,5 +222,6 @@ export const techicianService = {
     getAllTechnicianProfileFromDB,
     getSingleTechnicianProfileByIdFromDB,
     getTechnicianBookingsFromDB,
+    updateBookStausFromDB,
     updateTechnicianProfileIntoDB
 }

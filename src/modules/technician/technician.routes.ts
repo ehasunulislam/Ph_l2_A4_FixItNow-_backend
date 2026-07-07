@@ -14,13 +14,17 @@ router.get("/", technicianController.getAllTechnicianProfile);
 // get the technician's all booking 
 router.get("/bookings", authMiddlware.auth(UserRole.TECHNICIAN), technicianController.getTechnicianBookings);
 
+// update the technecian profile
+router.put("/profile",authMiddlware.auth(UserRole.TECHNICIAN),technicianController.updateTechnicianProfile);
+
 
 // get technician by id
 router.get("/:id", technicianController.getSingleTechnicianProfileById);
 
+// update the technician status ACCEPTED or DECLINE
+router.patch("/:id/status", authMiddlware.auth(UserRole.TECHNICIAN), technicianController.updateBookingStatus)
 
 
-// update the technecian profile
-router.put("/profile",authMiddlware.auth(UserRole.TECHNICIAN),technicianController.updateTechnicianProfile);
+
 
 export const technicianRouter = router
