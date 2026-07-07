@@ -12,7 +12,12 @@ router.get(
   technicianController.getTechnicianProfile
 );
 
-router.get("/", technicianController.getAllTechnicianProfile)
+// get all technician
+router.get("/", technicianController.getAllTechnicianProfile);
+
+
+// get technician by id
+router.get("/:id", technicianController.getSingleTechnicianProfileById);
 
 
 // update the technecian profile

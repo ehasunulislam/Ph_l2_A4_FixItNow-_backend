@@ -32,6 +32,22 @@ const getAllTechnicianProfile = catchAsync(async(req: Request, res: Response, ne
             profile
         },
     });
+});
+
+// get the technician with id
+const getSingleTechnicianProfileById = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+
+    const getSIngleProfile = await techicianService.getSingleTechnicianProfileByIdFromDB(id as string);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Technician profile retrieved successfully",
+      data: {
+        getSIngleProfile
+      },
+    });
 })
 
 
@@ -53,9 +69,9 @@ const updateTechnicianProfile = catchAsync(async(req: Request, res: Response, ne
 })
 
 
-
 export const technicianController = {
     getTechnicianProfile,
     getAllTechnicianProfile,
+    getSingleTechnicianProfileById,
     updateTechnicianProfile
 }

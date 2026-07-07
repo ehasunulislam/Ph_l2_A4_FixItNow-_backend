@@ -72,6 +72,28 @@ const getAllTechnicianProfileFromDB = async(filter: any) => {
     return profile
 }
 
+// get the technician with id
+const getSingleTechnicianProfileByIdFromDB  = async(userId: string) => {
+    const technician = await prisma.technicianProfile.findUnique({
+        where: {
+            id: userId
+        },
+        include: {
+            user: {
+                omit: {
+                    password: true
+                }
+            },
+            services: {
+                include: {
+                    category: true,
+                }
+            }
+        },
+    });
+
+    return technician
+}
 
 
 
@@ -98,5 +120,6 @@ const updateTechnicianProfileIntoDB  = async(userId: string, payload: ITechnicia
 export const techicianService = {
     getTechnicianProfileFromDB,
     getAllTechnicianProfileFromDB,
+    getSingleTechnicianProfileByIdFromDB,
     updateTechnicianProfileIntoDB
 }
