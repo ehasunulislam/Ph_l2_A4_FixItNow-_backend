@@ -9,7 +9,6 @@ enum UserStatus {
   BLOCKED
 }
 
-
 enum BookingStatus {
   REQUESTED
   ACCEPTED
@@ -18,4 +17,16 @@ enum BookingStatus {
   IN_PROGRESS
   COMPLETED
   CANCELLED
+}
+
+
+enum PaymentProvider {
+  STRIPE
+  SSLCOMMERZ
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
 }

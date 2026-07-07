@@ -56,6 +56,7 @@ export const ModelName = {
   Category: 'Category',
   TechnicianProfile: 'TechnicianProfile',
   Service: 'Service',
+  Payment: 'Payment',
   User: 'User'
 } as const
 
@@ -149,6 +150,23 @@ export const ServiceScalarFieldEnum = {
 } as const
 
 export type ServiceScalarFieldEnum = (typeof ServiceScalarFieldEnum)[keyof typeof ServiceScalarFieldEnum]
+
+
+export const PaymentScalarFieldEnum = {
+  id: 'id',
+  bookingId: 'bookingId',
+  stripeSessionId: 'stripeSessionId',
+  stripePaymentIntentId: 'stripePaymentIntentId',
+  transactionId: 'transactionId',
+  amount: 'amount',
+  provider: 'provider',
+  status: 'status',
+  paidAt: 'paidAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {

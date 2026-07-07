@@ -43,6 +43,11 @@ export type TechnicianProfile = Prisma.TechnicianProfileModel
  */
 export type Service = Prisma.ServiceModel
 /**
+ * Model Payment
+ * 
+ */
+export type Payment = Prisma.PaymentModel
+/**
  * Model User
  * 
  */
