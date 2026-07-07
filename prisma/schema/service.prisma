@@ -15,7 +15,7 @@ model Service {
   technicianProfile TechnicianProfile @relation(fields: [technicianProfileId], references: [id], onDelete: Cascade)
   category           Category          @relation(fields: [categoryId], references: [id])
 
-//   bookings Booking[]
+  bookings Booking[]
 
   @@map("services")
 }

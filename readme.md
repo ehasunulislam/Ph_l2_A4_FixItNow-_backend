@@ -1,3 +1,2 @@
 <!-- schema -->
-Service        -   Booking     - I
-Availability   -   Booking     -  I
+booking         - payment, review  - I

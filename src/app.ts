@@ -9,6 +9,7 @@ import { technicianRouter } from "./modules/technician/technician.routes";
 import { categoryRouter } from "./modules/category/category.routes";
 import { serviceRouter } from "./modules/service/service.routes";
 import { availabilityRouter } from "./modules/availability/availability.routes";
+import { bookingRouter } from "./modules/booking/booking.routes";
 
 
 const app: Application = express();
@@ -38,6 +39,8 @@ app.use("/api/technicians", availabilityRouter);
 app.use("/api/categories", categoryRouter);
 
 app.use("/api/services", serviceRouter);
+
+app.use("/api/bookings", bookingRouter)
 
 
 // global error

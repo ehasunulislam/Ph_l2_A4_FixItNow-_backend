@@ -23,7 +23,7 @@ const createAvailability = catchAsync(async(req: Request, res: Response, next: N
 
 
 // availability get all
-const getMyAvailability = catchAsync(async (req, res) => {
+const getMyAvailability = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
   const payload = req.user?.id as string;
 
   const availability = await availabilityService.getMyAvailabilityFromDB(payload);
@@ -40,7 +40,7 @@ const getMyAvailability = catchAsync(async (req, res) => {
 
 
 // update availability
-const updateAvailability = catchAsync(async (req, res) => {
+const updateAvailability = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
   const result = await availabilityService.updateAvailabilityFromDB(
       req.user!.id,
       req.params.id as string,
@@ -57,7 +57,7 @@ const updateAvailability = catchAsync(async (req, res) => {
 
 
 
-const deleteAvailability = catchAsync(async (req, res) => {
+const deleteAvailability = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
   await availabilityService.deleteAvailabilityFromDB(
     req.user!.id,
     req.params.id as string
