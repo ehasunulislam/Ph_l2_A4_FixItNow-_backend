@@ -12,6 +12,9 @@ router.post("/", authMiddlware.auth(UserRole.CUSTOMER) ,bookingController.create
 // Get My Bookings
 router.get("/", authMiddlware.auth(UserRole.CUSTOMER), bookingController.getMyBookings);
 
+// get booking by id
+router.get("/:id", authMiddlware.auth(UserRole.CUSTOMER), bookingController.getSingleBooking);
+
 
 
 export const bookingRouter = router;
