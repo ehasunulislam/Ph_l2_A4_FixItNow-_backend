@@ -20,6 +20,26 @@ const getTechnicianProfileFromDB = async(userId: string) => {
     return profile
 };
 
+
+
+// get all Technician 
+const getAllTechnicianProfileFromDB = async() => {
+    const profile = await prisma.technicianProfile.findMany({
+        include: {
+            user: {
+                omit: {
+                    password: true
+                }
+            }
+        }
+    });
+
+    return profile
+}
+
+
+
+
 // update TechnicianProfile service 
 const updateTechnicianProfileIntoDB  = async(userId: string, payload: ITechnicianProfilePayload) => {
     const profile = await prisma.technicianProfile.update({
@@ -42,5 +62,6 @@ const updateTechnicianProfileIntoDB  = async(userId: string, payload: ITechnicia
 
 export const techicianService = {
     getTechnicianProfileFromDB,
+    getAllTechnicianProfileFromDB,
     updateTechnicianProfileIntoDB
 }

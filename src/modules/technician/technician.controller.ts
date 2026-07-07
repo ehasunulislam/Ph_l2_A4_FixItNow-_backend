@@ -19,6 +19,22 @@ const getTechnicianProfile = catchAsync(async(req: Request, res: Response, next:
     });
 });
 
+
+// getAllTechnicianProfileFromDB controller
+const getAllTechnicianProfile = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
+    const profile  = await techicianService.getAllTechnicianProfileFromDB();
+
+    sendResponse(res, {
+        success: true,
+        statusCode: httpStatus.OK,
+        message: "Technician profile retrieved successfully",
+        data: {
+            profile
+        },
+    });
+})
+
+
 // update TechnicianProfile controller
 const updateTechnicianProfile = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
     const profile = await techicianService.updateTechnicianProfileIntoDB(
@@ -40,5 +56,6 @@ const updateTechnicianProfile = catchAsync(async(req: Request, res: Response, ne
 
 export const technicianController = {
     getTechnicianProfile,
+    getAllTechnicianProfile,
     updateTechnicianProfile
 }

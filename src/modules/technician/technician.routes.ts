@@ -12,6 +12,8 @@ router.get(
   technicianController.getTechnicianProfile
 );
 
+router.get("/", technicianController.getAllTechnicianProfile)
+
 
 // update the technecian profile
 router.put(
