@@ -23,8 +23,44 @@ const getTechnicianProfileFromDB = async(userId: string) => {
 
 
 // get all Technician 
-const getAllTechnicianProfileFromDB = async() => {
+const getAllTechnicianProfileFromDB = async(filter: any) => {
+    const { searchTerm, location, type} = filter;
+    const whereConditions: any = {};
+
+    if (searchTerm) {
+        whereConditions.OR = [
+        {
+            location: {
+                contains: searchTerm,
+                mode: 'insensitive', 
+            },
+        },
+        {
+            bio: {
+                contains: searchTerm,
+                mode: 'insensitive',
+            },
+        },
+        {
+            user: {
+                name: {
+                    contains: searchTerm,
+                    mode: 'insensitive',
+                },
+            },
+        },
+        ];
+    }
+
+    if (location) {
+        whereConditions.location = {
+            contains: location,
+            mode: 'insensitive',
+        };
+    }
+
     const profile = await prisma.technicianProfile.findMany({
+        where: whereConditions,
         include: {
             user: {
                 omit: {
@@ -33,7 +69,6 @@ const getAllTechnicianProfileFromDB = async() => {
             }
         }
     });
-
     return profile
 }
 

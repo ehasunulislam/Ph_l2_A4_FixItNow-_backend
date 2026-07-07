@@ -22,7 +22,7 @@ const getTechnicianProfile = catchAsync(async(req: Request, res: Response, next:
 
 // getAllTechnicianProfileFromDB controller
 const getAllTechnicianProfile = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
-    const profile  = await techicianService.getAllTechnicianProfileFromDB();
+    const profile  = await techicianService.getAllTechnicianProfileFromDB(req.query);
 
     sendResponse(res, {
         success: true,
