@@ -4,6 +4,26 @@ import { authService } from "./auth.service";
 import { sendResponse } from "../../utils/sedndResponse";
 import httpStatus from "http-status";
 
+
+
+const createUser = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const payload = req.body;
+
+    const user = await authService.createUserFromDB(payload);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.CREATED,
+      message: "User registered successfully",
+      data: {
+        user,
+      },
+    });
+  },
+);
+
+
 const loginUser = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
     const payload = req.body;
 
@@ -35,6 +55,24 @@ const loginUser = catchAsync(async(req: Request, res: Response, next: NextFuncti
 });
 
 
+
+const getMyProfile = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const result = await authService.getProfileFromDB(req.user?.id as string);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Profile retrieved successfully",
+      data: {
+        result
+      }
+    })
+  }
+);
+
+
+
 const newAccessToken = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
     const refreshToken = req.cookies.refreshableToken;
 
@@ -59,6 +97,8 @@ const newAccessToken = catchAsync(async(req: Request, res: Response, next: NextF
 })
 
 export const auhtController = {
+    createUser,
     loginUser,
+    getMyProfile,
     newAccessToken
 }

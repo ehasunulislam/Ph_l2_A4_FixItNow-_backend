@@ -3,7 +3,6 @@ import cors from "cors";
 import config from "./config";
 import cookieParser from "cookie-parser";
 import { globalErrorHandler } from "./middleware/globalError.middlware";
-import { userRoutes } from "./modules/user/user.routes";
 import { notRouteFound } from "./middleware/notRouteFound.middleware";
 import { authRouter } from "./modules/auth/auth.routes";
 import { technicianRouter } from "./modules/technician/technician.routes";
@@ -31,17 +30,14 @@ app.get("/", async (req: Request, res: Response) => {
 });
 
 
-// user route
-app.use("/api/users", userRoutes);
-
 app.use("/api/auth", authRouter);
 
-app.use("/api/technician", technicianRouter);
-app.use("/api/technician", availabilityRouter);
+app.use("/api/technicians", technicianRouter);
+app.use("/api/technicians", availabilityRouter);
 
 app.use("/api/categories", categoryRouter);
 
-app.use("/api/services", serviceRouter)
+app.use("/api/services", serviceRouter);
 
 
 // global error
