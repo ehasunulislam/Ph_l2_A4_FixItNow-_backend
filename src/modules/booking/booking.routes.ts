@@ -8,7 +8,6 @@ const router = Router();
 // create booking 
 router.post("/", authMiddlware.auth(UserRole.CUSTOMER) ,bookingController.createBooking);
 
-
 // Get My Bookings
 router.get("/", authMiddlware.auth(UserRole.CUSTOMER), bookingController.getMyBookings);
 

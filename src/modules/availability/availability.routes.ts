@@ -20,7 +20,7 @@ router.get(
 );
 
 // update
-router.patch(
+router.put(
   "/availability/:id",
   authMiddlware.auth(UserRole.TECHNICIAN),
   availabilityController.updateAvailability
