@@ -38,13 +38,12 @@ app.get("/", async (req: Request, res: Response) => {
 app.use("/api/auth", authRouter);
 
 // technician routers
-app.use("/api/technicians", technicianRouter);
-app.use("/api/technicians", availabilityRouter);
+app.use("/api/technician", technicianRouter);
+app.use("/api/technician", availabilityRouter);
 
 
 // category
 app.use("/api/categories", categoryRouter);
-
 
 // service
 app.use("/api/services", serviceRouter);
@@ -62,7 +61,7 @@ app.use("/api/reviews", reviewRoutes);
 
 
 // admin routes
-app.use("/api/admin", adminRouter)
+app.use("/api/admin", adminRouter);
 
 
 // global error

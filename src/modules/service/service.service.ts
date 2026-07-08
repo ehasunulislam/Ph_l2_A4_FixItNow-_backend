@@ -1,6 +1,6 @@
 import { title } from "node:process";
 import { prisma } from "../../lib/prisma"
-import { IServicePayload, IUpdateServicePayload } from "./service.interface"
+import { IServicePayload, IServiceQuery, IUpdateServicePayload } from "./service.interface"
 
 // post create service 
 const createServiceFromDB = async(userId: string, payload: IServicePayload) => {
@@ -42,10 +42,77 @@ const createServiceFromDB = async(userId: string, payload: IServicePayload) => {
 }
 
 // get all services
-const getAllServicesFromDB = async () => {
+const getAllServicesFromDB = async (query: IServiceQuery) => {
+  const {
+    search,
+    type,
+    location,
+    rating,
+    page = "1",
+    limit = "10",
+    sortBy = "createdAt",
+    sortOrder = "desc",
+  } = query;
+
+  const pageNumber = Number(page);
+  const limitNumber = Number(limit);
+  const skip = (pageNumber - 1) * limitNumber;
+
+  const where = {
+    ...(search && {
+      OR: [
+        {
+          title: {
+            contains: search,
+            mode: "insensitive" as const,
+          },
+        },
+        {
+          description: {
+            contains: search,
+            mode: "insensitive" as const,
+          },
+        },
+      ],
+    }),
+
+    ...(type && {
+      category: {
+        name: {
+          contains: type,
+          mode: "insensitive" as const,
+        },
+      },
+    }),
+
+    ...(location && {
+      technicianProfile: {
+        location: {
+          contains: location,
+          mode: "insensitive" as const,
+        },
+      },
+    }),
+
+    ...(rating && {
+      technicianProfile: {
+        averageRating: {
+          gte: Number(rating),
+        },
+      },
+    }),
+  };
+
+  const total = await prisma.service.count({
+    where,
+  });
+
   const services = await prisma.service.findMany({
+    where,
+
     include: {
       category: true,
+
       technicianProfile: {
         include: {
           user: {
@@ -56,12 +123,23 @@ const getAllServicesFromDB = async () => {
         },
       },
     },
+
+    skip,
+    take: limitNumber,
+
     orderBy: {
-      createdAt: "desc",
+      [sortBy]: sortOrder,
     },
   });
 
-  return services;
+  return {
+    meta: {
+      page: pageNumber,
+      limit: limitNumber,
+      total,
+    },
+    data: services,
+  };
 };
 
 

@@ -13,3 +13,17 @@ export interface IUpdateServicePayload {
   price?: number;
   duration?: number;
 }
+
+
+export interface IServiceQuery {
+  search?: string;
+  type?: string;
+  location?: string;
+  rating?: string;
+
+  page?: string;
+  limit?: string;
+
+  sortBy?: string;
+  sortOrder?: "asc" | "desc";
+}
