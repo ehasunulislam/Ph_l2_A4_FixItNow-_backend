@@ -2,10 +2,12 @@ import { error } from "node:console";
 import { prisma } from "../../lib/prisma";
 import { ICreatePaymentPayload } from "./payment.interface"
 import { AppError } from "../../errors/AppError";
-import { BookingStatus } from "../../../prisma/generated/prisma/enums";
+import { BookingStatus, PaymentProvider, PaymentStatus } from "../../../prisma/generated/prisma/enums";
 import { stripe } from "../../lib/stripe";
 import config from "../../config";
 
+
+// payment create in stripe 
 const createPaymentIntentIntoDB = async(userId: string, payload: ICreatePaymentPayload) => {
     const { bookingId } = payload;
 
@@ -62,13 +64,97 @@ const createPaymentIntentIntoDB = async(userId: string, payload: ICreatePaymentP
             customerId: userId
         },
 
-        success_url: `${config.app_url}/premimum?success=true`,
+        success_url: `${config.app_url}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${config.app_url}/payments?success=false`,
     });
 
-    return session.url
+    return {
+       checkoutURL: session.url,
+       sessionId: session.id
+    }
 }
 
+
+// payment intsert into DB
+const confirmPaymentService = async (
+  userId: string,
+  sessionId: string
+) => {
+  const session = await stripe.checkout.sessions.retrieve(sessionId);
+
+  if (!session) {
+    throw new AppError(404, "Checkout session not found");
+  }
+
+  if (session.payment_status !== "paid") {
+    throw new AppError(400, "Payment has not been completed");
+  }
+
+  const bookingId = session.metadata?.bookingId;
+
+  if (!bookingId) {
+    throw new AppError(400, "Booking id not found");
+  }
+
+  const booking = await prisma.booking.findUnique({
+    where: {
+      id: bookingId,
+    },
+    include: {
+      payment: true,
+      service: true
+    },
+  });
+
+  if (!booking) {
+    throw new AppError(404, "Booking not found");
+  }
+
+  if (booking.customerId !== userId) {
+    throw new AppError(403, "Unauthorized");
+  }
+
+  if (booking.payment) {
+    throw new AppError(400, "Payment already confirmed");
+  }
+
+  const result = await prisma.$transaction(async (tx) => {
+    const payment = await tx.payment.create({
+      data: {
+        bookingId,
+
+        amount: booking.service.price, 
+
+        provider: PaymentProvider.STRIPE,
+
+        stripeSessionId: session.id,
+
+        stripePaymentIntentId: session.payment_intent as string,
+
+        transactionId: session.payment_intent as string,
+
+        status: PaymentStatus.COMPLETED,
+
+        paidAt: new Date(),
+      },
+    });
+
+    await tx.booking.update({
+      where: {
+        id: bookingId,
+      },
+      data: {
+        status: BookingStatus.PAID,
+      },
+    });
+
+    return payment;
+  });
+
+  return result;
+};
+
 export const paymentService = {
-    createPaymentIntentIntoDB
+    createPaymentIntentIntoDB,
+    confirmPaymentService
 }

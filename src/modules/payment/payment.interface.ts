@@ -3,7 +3,5 @@ export interface ICreatePaymentPayload {
 }
 
 export interface IConfirmPaymentPayload {
-  bookingId: string;
-  paymentIntentId: string;
-  paymentMethod?: string;
+    sessionId: string;
 }
