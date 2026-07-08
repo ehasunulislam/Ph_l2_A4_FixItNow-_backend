@@ -312,23 +312,6 @@ Payment Confirmation
 Booking Completed
 ```
 
----
-
-# 🗃️ Database Design
-
-ERD Diagram
-
-https://drawsql.app/teams/ehasun-ul-islam/diagrams/fixitnow
-
----
-
-# 🚀 Deployment
-
-Backend deployed on
-
-https://fixitnow-xi.vercel.app/
-
----
 
 # 👨‍💻 Author
 
