@@ -1,9 +1,5 @@
-export interface IUserUpdatePayload {
-  name: string;
-  password: string;
-  phone?: string;
-  role: "CUSTOMER" | "TECHNICIAN" | "ADMIN";
-  status?: "ACTIVE" | "BLOCKED";
-  profileImage?: string;
-  address?: string;
+import { UserStatus } from "../../../prisma/generated/prisma/enums";
+
+export interface IUpdateUserStatusPayload {
+  status: UserStatus;
 }

@@ -1,6 +1,6 @@
 import { AppError } from "../../errors/AppError";
 import { prisma } from "../../lib/prisma";
-import { IUserUpdatePayload } from "./admin.interface";
+import { IUpdateUserStatusPayload } from "./admin.interface";
 
 
 // get all uer 
@@ -14,7 +14,7 @@ const getAllUsersFromDB = async () => {
 
 
 // update status
-const updateUserStatusIntoDB = async (userId: string, payload: IUserUpdatePayload) => {
+const updateUserStatusIntoDB = async (userId: string, payload: IUpdateUserStatusPayload) => {
     const user = await prisma.user.findUnique({
         where: {
             id: userId,
@@ -31,7 +31,6 @@ const updateUserStatusIntoDB = async (userId: string, payload: IUserUpdatePayloa
         },
         data: {
             status: payload.status,
-            address: payload.address
         },
         omit: {
             password: true,
