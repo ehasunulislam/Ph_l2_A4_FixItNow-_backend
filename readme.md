@@ -149,24 +149,20 @@ npm install
 Create a `.env` file.
 
 ```env
-DATABASE_URL=
+PORT= Your_backend_port_here
+database_url= Your_connection_string_here
+app_url = your_app_url
 
-PORT=5000
+bcrypt_salt_rounds = bcrypt_time_provided
 
-NODE_ENV=development
+jwt_access_secret = jwt_access
+jwt_access_expires_in = jwt_access_expire_time
 
-APP_URL=http://localhost:5000
+jwt_refresh_secret = jwt_refresh
+jwt_refresh_expires_in = jwt_refresh_expire_time
 
-JWT_ACCESS_SECRET=
-JWT_ACCESS_EXPIRES_IN=7d
-
-JWT_REFRESH_SECRET=
-JWT_REFRESH_EXPIRES_IN=365d
-
-BCRYPT_SALT_ROUNDS=10
-
-STRIPE_SECRET_KEY=
-STRIPE_WEBHOOK_SECRET=
+STIPE_PUBLISH_KEY= Your_stripe_publish_kyey
+STRIPE_SECRET_KEY = Your_stripe_secrect_key
 ```
 
 ---
