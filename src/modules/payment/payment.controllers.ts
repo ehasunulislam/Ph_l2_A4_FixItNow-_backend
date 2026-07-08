@@ -55,11 +55,29 @@ const getMyPayments  = catchAsync(async(req: Request, res: Response, next: NextF
         paymentHistory
       }
     });
-})
+});
+
+
+// get payment by id
+const getSinglePayment = catchAsync(async (req, res) => {
+    const id = req.user?.id as string;
+    const role = req.user?.role as string;
+    const payload = req.params.id  as string;
+
+  const result = await paymentService.getSinglePaymentFromDB(id, role, payload);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "Payment retrieved successfully",
+    data: result,
+  });
+});
 
 
 export const paymentController = {
     cretepayment,
     confirmPayment,
-    getMyPayments
+    getMyPayments,
+    getSinglePayment
 }

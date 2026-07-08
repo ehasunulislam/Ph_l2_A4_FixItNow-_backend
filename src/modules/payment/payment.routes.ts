@@ -14,4 +14,8 @@ router.post("/confirm", authMiddlware.auth(UserRole.CUSTOMER), paymentController
 // get payment history
 router.get("/", authMiddlware.auth(UserRole.CUSTOMER), paymentController.getMyPayments);
 
+
+// get payment history by id
+router.get("/:id", authMiddlware.auth(UserRole.CUSTOMER, UserRole.ADMIN), paymentController.getSinglePayment);
+
 export const paymentRouter = router;

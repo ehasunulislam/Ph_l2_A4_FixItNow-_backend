@@ -187,8 +187,44 @@ const getMyPaymentsFromDB = async (userId: string) => {
 };
 
 
+
+// get payment by id
+const getSinglePaymentFromDB = async (userId: string, role: string, paymentId: string) => {
+  const payment = await prisma.payment.findUniqueOrThrow({
+    where: {
+      id: paymentId,
+    },
+    include: {
+        booking: {
+            include: {
+            service: true,
+            technicianProfile: {
+                include: {
+                user: {
+                    select: {
+                    name: true,
+                    email: true,
+                    },
+                },
+                },
+            },
+            },
+        },
+    },
+  });
+
+  if (role !== "ADMIN" && payment.booking.customerId !== userId) {
+    throw new AppError(403, "Unauthorized");
+  }
+
+  return payment;
+};
+
+
+
 export const paymentService = {
     createPaymentIntentIntoDB,
     confirmPaymentService,
-    getMyPaymentsFromDB
+    getMyPaymentsFromDB,
+    getSinglePaymentFromDB
 }
