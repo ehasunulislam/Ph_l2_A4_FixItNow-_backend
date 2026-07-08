@@ -1,28 +1,28 @@
 model Booking {
-  id             String   @id @default(uuid())
+  id String @id @default(uuid())
 
-  customerId     String
-  technicianProfileId   String
-  serviceId      String
-  availabilityId String @unique
+  customerId          String
+  technicianProfileId String
+  serviceId           String
+  availabilityId      String @unique
 
-  bookingDate    DateTime
+  bookingDate DateTime
 
-  address        String
-  note           String?
+  address String
+  note    String?
 
   status BookingStatus @default(REQUESTED)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  customer           User               @relation("CustomerBookings", fields: [customerId], references: [id], onDelete: Cascade)
-  technicianProfile  TechnicianProfile  @relation(fields: [technicianProfileId], references: [id], onDelete: Cascade)
-  service            Service            @relation(fields: [serviceId], references: [id], onDelete: Cascade)
-  availability       Availability       @relation(fields: [availabilityId], references: [id], onDelete: Cascade)
+  customer          User              @relation("CustomerBookings", fields: [customerId], references: [id], onDelete: Cascade)
+  technicianProfile TechnicianProfile @relation(fields: [technicianProfileId], references: [id], onDelete: Cascade)
+  service           Service           @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  availability      Availability      @relation(fields: [availabilityId], references: [id], onDelete: Cascade)
 
   payment Payment?
-  //   review  Review?
+  review  Review?
 
   @@map("booking")
 }

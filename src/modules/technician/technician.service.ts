@@ -135,67 +135,91 @@ const getTechnicianBookingsFromDB = async (userId: string) => {
 
 
 // get the technician's booking -> update
-const updateBookStausFromDB = async(userId: string, bookingId: string, payload: IUpdateBookingStatus) => {
-    const technician = await prisma.technicianProfile.findUnique({
-        where: {
-            userId
-        }
-    });
+const updateBookStausFromDB = async ( userId: string, bookingId: string, payload: IUpdateBookingStatus
+) => {
+  const technician = await prisma.technicianProfile.findUnique({
+    where: {
+      userId,
+    },
+  });
 
-    if (!technician) {
-        throw new Error("Technician profile not found");
+  if (!technician) {
+    throw new Error("Technician profile not found");
+  }
+
+  const booking = await prisma.booking.findUnique({
+    where: {
+      id: bookingId,
+    },
+  });
+
+  if (!booking) {
+    throw new Error("Booking not found");
+  }
+
+  if (booking.technicianProfileId !== technician.id) {
+    throw new Error("You are not authorized to update this booking");
+  }
+
+  // REQUESTED -> ACCEPTED / DECLINED
+  if (booking.status === BookingStatus.REQUESTED) {
+    if (
+      payload.status !== BookingStatus.ACCEPTED &&
+      payload.status !== BookingStatus.DECLINED
+    ) {
+      throw new Error(
+        "Requested booking can only be ACCEPTED or DECLINED"
+      );
     }
+  }
 
-    const booking = await prisma.booking.findUnique({
-        where: {
-            id: bookingId
-        }
-    });
-
-    if (!booking) {
-        throw new Error("Booking not found");
+  // PAID -> IN_PROGRESS
+  else if (booking.status === BookingStatus.PAID) {
+    if (payload.status !== BookingStatus.IN_PROGRESS) {
+      throw new Error(
+        "Paid booking can only be moved to IN_PROGRESS"
+      );
     }
+  }
 
-    // check own book id 
-    if(booking.technicianProfileId !== technician.id) {
-        throw new Error("You are not authorized to update this booking");
+  // IN_PROGRESS -> COMPLETED
+  else if (booking.status === BookingStatus.IN_PROGRESS) {
+    if (payload.status !== BookingStatus.COMPLETED) {
+      throw new Error(
+        "In-progress booking can only be marked COMPLETED"
+      );
     }
+  }
 
-    // if REQUESTED status is not available then it can not be updated
-    if(booking.status !== BookingStatus.REQUESTED) {
-        throw new Error("Booking has already been processed");
-    }
+  // DECLINED / COMPLETED
+  else {
+    throw new Error("Booking can no longer be updated");
+  }
 
-    // if status is ACCEPTED  or DECLINED
-    if(payload.status !== BookingStatus.ACCEPTED && payload.status !== BookingStatus.DECLINED) {
-        throw new Error("Invalid booking status");
-    }
-
-    const updatedBooking = await prisma.booking.update({
-        where: {
-            id: bookingId
+  const updatedBooking = await prisma.booking.update({
+    where: {
+      id: bookingId,
+    },
+    data: {
+      status: payload.status,
+    },
+    include: {
+      customer: {
+        omit: {
+          password: true,
         },
-        data: {
-            status: payload.status
-        },
+      },
+      service: {
         include: {
-            customer: {
-                omit: {
-                    password: true
-                }
-            },
-            service: {
-                include: {
-                    category: true
-                }
-            },
-            availability: true
-        }
-    });
+          category: true,
+        },
+      },
+      availability: true,
+    },
+  });
 
-    return updatedBooking
-}
-
+  return updatedBooking;
+};
 
 // update TechnicianProfile service 
 const updateTechnicianProfileIntoDB  = async(userId: string, payload: ITechnicianProfilePayload) => {

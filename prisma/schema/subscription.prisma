@@ -1,24 +1,24 @@
 model Payment {
-    id String @id @default(uuid())
+  id String @id @default(uuid())
 
-    bookingId String @unique
+  bookingId String @unique
 
-    stripeSessionId String? @unique
-    stripePaymentIntentId String? @unique
-    transactionId String? @unique
+  stripeSessionId       String? @unique
+  stripePaymentIntentId String? @unique
+  transactionId         String? @unique
 
-    amount Decimal @db.Decimal(10,2)
+  amount Decimal @db.Decimal(10, 2)
 
-    provider PaymentProvider  @default(STRIPE)
+  provider PaymentProvider @default(STRIPE)
 
-    status PaymentStatus @default(PENDING)
+  status PaymentStatus @default(PENDING)
 
-    paidAt DateTime?
+  paidAt DateTime?
 
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-    booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
 
-    @@map("payments")
+  @@map("payments")
 }

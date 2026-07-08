@@ -1,3 +1,5 @@
+import type { BookingStatus as PrismaBookingStatus } from "../../../prisma/generated/prisma/enums";
+
 export interface ITechnicianProfilePayload {
   bio?: string;
   experience?: number;
@@ -6,5 +8,5 @@ export interface ITechnicianProfilePayload {
 }
 
 export interface IUpdateBookingStatus {
-  status: "ACCEPTED" | "DECLINED";
+  status: PrismaBookingStatus;
 }

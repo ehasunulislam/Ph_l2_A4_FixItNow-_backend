@@ -38,6 +38,11 @@ export type Category = Prisma.CategoryModel
  */
 export type TechnicianProfile = Prisma.TechnicianProfileModel
 /**
+ * Model Review
+ * 
+ */
+export type Review = Prisma.ReviewModel
+/**
  * Model Service
  * 
  */

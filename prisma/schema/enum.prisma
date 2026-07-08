@@ -19,7 +19,6 @@ enum BookingStatus {
   CANCELLED
 }
 
-
 enum PaymentProvider {
   STRIPE
   SSLCOMMERZ

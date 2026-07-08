@@ -55,6 +55,7 @@ export const ModelName = {
   Booking: 'Booking',
   Category: 'Category',
   TechnicianProfile: 'TechnicianProfile',
+  Review: 'Review',
   Service: 'Service',
   Payment: 'Payment',
   User: 'User'
@@ -135,6 +136,20 @@ export const TechnicianProfileScalarFieldEnum = {
 } as const
 
 export type TechnicianProfileScalarFieldEnum = (typeof TechnicianProfileScalarFieldEnum)[keyof typeof TechnicianProfileScalarFieldEnum]
+
+
+export const ReviewScalarFieldEnum = {
+  id: 'id',
+  customerId: 'customerId',
+  technicianProfileId: 'technicianProfileId',
+  bookingId: 'bookingId',
+  rating: 'rating',
+  comment: 'comment',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
 
 
 export const ServiceScalarFieldEnum = {

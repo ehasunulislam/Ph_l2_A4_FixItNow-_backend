@@ -1,16 +1,16 @@
 model Availability {
-  id                    String   @id @default(uuid())
+  id String @id @default(uuid())
 
-  technicianProfileId   String
+  technicianProfileId String
 
-  date                  DateTime
-  startTime             String   @db.VarChar(10)
-  endTime               String   @db.VarChar(10)
+  date      DateTime
+  startTime String   @db.VarChar(10)
+  endTime   String   @db.VarChar(10)
 
-  isBooked              Boolean  @default(false)
+  isBooked Boolean @default(false)
 
-  createdAt             DateTime @default(now())
-  updatedAt             DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   technicianProfile TechnicianProfile @relation(fields: [technicianProfileId], references: [id], onDelete: Cascade)
 
