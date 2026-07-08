@@ -135,7 +135,7 @@ src
 ## Clone Repository
 
 ```bash
-git clone <your-github-repository-url>
+git clone https://github.com/ehasunulislam/Ph_l2_A4_FixItNow-_backend.git
 ```
 
 ## Install Packages
