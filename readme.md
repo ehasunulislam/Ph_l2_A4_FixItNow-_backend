@@ -317,13 +317,13 @@ Booking Completed
 
 ### Ehasun Ul Islam
 
-Backend Developer
+Full Stack Developer
 
 GitHub:
-https://github.com/your-github-username
+https://github.com/ehasunulislam
 
 LinkedIn:
-https://linkedin.com/in/your-linkedin
+https://www.linkedin.com/in/ehasun/
 
 ---
 
