@@ -5,7 +5,13 @@ import { UserRole } from "../../../prisma/generated/prisma/enums";
 
 const router = Router();
 
+// create payment 
 router.post("/create", authMiddlware.auth(UserRole.CUSTOMER), paymentController.cretepayment);
+
+// confrim payment
 router.post("/confirm", authMiddlware.auth(UserRole.CUSTOMER), paymentController.confirmPayment);
+
+// get payment history
+router.get("/", authMiddlware.auth(UserRole.CUSTOMER), paymentController.getMyPayments);
 
 export const paymentRouter = router;

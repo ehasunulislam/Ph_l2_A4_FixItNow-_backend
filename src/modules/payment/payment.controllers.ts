@@ -37,10 +37,29 @@ const confirmPayment = catchAsync(async(req: Request, res: Response, next: NextF
         payment
       }
     });
+});
+
+
+
+// get all payment
+const getMyPayments  = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
+    const id = req.user?.id as string
+
+    const paymentHistory = await paymentService.getMyPaymentsFromDB(id);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.CREATED,
+      message: "Payment history",
+      data: {
+        paymentHistory
+      }
+    });
 })
 
 
 export const paymentController = {
     cretepayment,
-    confirmPayment
+    confirmPayment,
+    getMyPayments
 }

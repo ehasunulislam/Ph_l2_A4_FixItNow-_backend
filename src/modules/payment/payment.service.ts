@@ -76,10 +76,7 @@ const createPaymentIntentIntoDB = async(userId: string, payload: ICreatePaymentP
 
 
 // payment intsert into DB
-const confirmPaymentService = async (
-  userId: string,
-  sessionId: string
-) => {
+const confirmPaymentService = async (userId: string, sessionId: string) => {
   const session = await stripe.checkout.sessions.retrieve(sessionId);
 
   if (!session) {
@@ -154,7 +151,44 @@ const confirmPaymentService = async (
   return result;
 };
 
+
+// get all payment 
+const getMyPaymentsFromDB = async (userId: string) => {
+  const payments = await prisma.payment.findMany({
+    where: {
+      booking: {
+        customerId: userId,
+      },
+    },
+    include: {
+      booking: {
+        include: {
+          service: true,
+          technicianProfile: {
+            include: {
+              user: {
+                select: {
+                  id: true,
+                  name: true,
+                  email: true,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return payments;
+};
+
+
 export const paymentService = {
     createPaymentIntentIntoDB,
-    confirmPaymentService
+    confirmPaymentService,
+    getMyPaymentsFromDB
 }
