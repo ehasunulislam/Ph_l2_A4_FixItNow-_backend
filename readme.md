@@ -329,4 +329,4 @@ https://www.linkedin.com/in/ehasun/
 
 # 📄 License
 
-This project was developed as part of the Programming Hero Level-2 Assignment.
+This project was developed as part of the Backend Development.
