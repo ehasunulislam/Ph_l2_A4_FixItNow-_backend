@@ -1,0 +1,1126 @@
+{
+  "info": {
+    "_postman_id": "7b9ae5c4-c66e-45cb-8793-45cb1a672fdb",
+    "name": "FixItNow",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "48495231",
+    "_collection_link": "https://go.postman.co/collection/48495231-7b9ae5c4-c66e-45cb-8793-45cb1a672fdb?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "login",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"geta@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/auth/login",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get new refresh token",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Test 5\",\r\n    \"email\": \"test5@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"phone\": \"+8801601403874\",\r\n    \"role\": \"ADMIN\",\r\n    \"profileImage\": \"www.youtube.com\",\r\n    \"address\": \"Malotinagur, Bogura\"\r\n}"
+            },
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/auth/refresh-token",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "refresh-token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Kajol\",\r\n    \"email\": \"kajol@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"phone\": \"+8801601403874\",\r\n    \"role\": \"TECHNICIAN\",\r\n    \"profileImage\": \"www.facebook.com\",\r\n    \"address\": \"Maymansing\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/auth/register",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Auth me",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/auth/me",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Technician",
+      "item": [
+        {
+          "name": "Get profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/technician/profile",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "technician",
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update techecian profile",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"bio\": \"comoker ar caremoti onnorokom\",\r\n    \"experience\": 5,\r\n    \"hourlyRate\": \"300.00\",\r\n    \"location\": \"Rajshahi\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/technician/profile",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "technician",
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get technician by id",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/technician/61591bd5-8b7b-4410-9435-9a34947433a6",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "technician",
+                "61591bd5-8b7b-4410-9435-9a34947433a6"
+              ],
+              "query": [
+                {
+                  "key": "location",
+                  "value": "Malotinagur",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Technician",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/technician",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "technician"
+              ],
+              "query": [
+                {
+                  "key": "",
+                  "value": "",
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get all Teachnician's Booking",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/technician/bookings",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "technician",
+                "bookings"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update the booking status",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"status\":\"COMPLETED\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/technician/50ef55b6-e9c8-4fb2-a7c6-955e742ed626/status",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "technician",
+                "50ef55b6-e9c8-4fb2-a7c6-955e742ed626",
+                "status"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Category",
+      "item": [
+        {
+          "name": "create category",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Gardener\",\r\n    \"slug\": \"landscape-gardener\",\r\n    \"icon\": \"🏡\",\r\n    \"description\": \"Lawn care, landscaping, and garden maintenance\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/categories",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "All category",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Plumbing\",\r\n  \"slug\": \"plumbing\",\r\n  \"icon\": \"🚰\",\r\n  \"description\": \"Plumbing repair and maintenance\"\r\n}"
+            },
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/categories",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update category",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Plumbing\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/categories/5c10f1e2-1058-48b2-a0f4-2821595d3d0c",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "categories",
+                "5c10f1e2-1058-48b2-a0f4-2821595d3d0c"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete category",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/categories/0a6c0351-1a9c-42b0-a72e-76a7deb7d457",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "categories",
+                "0a6c0351-1a9c-42b0-a72e-76a7deb7d457"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Service",
+      "item": [
+        {
+          "name": "create service",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"categoryId\": \"e6568637-931f-490d-bf5d-f280e03f13e8\",\r\n  \"title\": \"Air Conditioning and clening\",\r\n  \"description\": \"Have 2 years of exprerience\",\r\n  \"price\": 300,\r\n  \"duration\": 10\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/services",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "services"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get all service",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"categoryId\": \"fe020391-83d9-4b3b-8b51-4d67929be389\",\r\n  \"title\": \"Full Stack developer\",\r\n  \"description\": \"Hi, this is ehasun. I am full stack developer\",\r\n  \"price\": 1500,\r\n  \"duration\": 120\r\n}"
+            },
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/services",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "services"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "plumbing",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "type",
+                  "value": "Cleaning",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "location",
+                  "value": "Dhaka",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "rating",
+                  "value": "",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "2",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "limit",
+                  "value": "5",
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update service",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"Full Stack developer form bangladesh\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/services/e6009549-ec4c-45ba-9ed5-ad6318e0751f",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "services",
+                "e6009549-ec4c-45ba-9ed5-ad6318e0751f"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete service",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/services/e6009549-ec4c-45ba-9ed5-ad6318e0751f",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "services",
+                "e6009549-ec4c-45ba-9ed5-ad6318e0751f"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Availability",
+      "item": [
+        {
+          "name": "Create Availibility",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"date\": \"2026-08-08\",\r\n  \"startTime\": \"06:00\",\r\n  \"endTime\": \"08:00\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/technicians/availability",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "technicians",
+                "availability"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get all avalibility",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"date\": \"2026-07-08\",\r\n  \"startTime\": \"08:00\",\r\n  \"endTime\": \"10:00\"\r\n}"
+            },
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/technicians/availability",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "technicians",
+                "availability"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Booking",
+      "item": [
+        {
+          "name": "create booking",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"serviceId\": \"eb59cc09-2d33-44ef-903c-c0f6cdf86bc0\",\r\n  \"availabilityId\": \"952e39d2-c0df-4432-9473-11b07121e2ae\",\r\n  \"bookingDate\": \"2026-07-10T10:00:00.000Z\",\r\n  \"address\": \"Bogura, Bangladesh\",\r\n  \"note\": \"Please bring necessary tools.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/bookings",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "bookings"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get my booking",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/bookings",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "bookings"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get booking by id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/bookings/bce3a948-77d8-4f63-aba8-066f681c5e1f",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "bookings",
+                "bce3a948-77d8-4f63-aba8-066f681c5e1f"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Payment",
+      "item": [
+        {
+          "name": "create payment",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"bookingId\": \"ecb79d2d-94d3-4944-8631-c77ac6ad9886\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/payments/create",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "payments",
+                "create"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "confirm payment",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n   \"sessionId\": \"cs_test_a1QzEavPj7pFuvd0UpucZFPTfm8wqo72yhqImIft46DEscLrz4kRRxxNID\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/payments/confirm",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "payments",
+                "confirm"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get my payments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/payments",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "payments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get my payments by id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/payments/88f2fdc1-4e74-4f32-a502-417fbe0ad68d",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "payments",
+                "88f2fdc1-4e74-4f32-a502-417fbe0ad68d"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Reviews",
+      "item": [
+        {
+          "name": "create review",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"bookingId\": \"50ef55b6-e9c8-4fb2-a7c6-955e742ed626\",\r\n  \"rating\": 5,\r\n  \"comment\": \"Very good service\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/reviews",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "reviews"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get all Review",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/reviews",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "reviews"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get all Review of login user",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/reviews/my-reviews",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "reviews",
+                "my-reviews"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "admin",
+      "item": [
+        {
+          "name": "get all user",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"bookingId\": \"50ef55b6-e9c8-4fb2-a7c6-955e742ed626\",\r\n  \"rating\": 5,\r\n  \"comment\": \"Very good service\"\r\n}"
+            },
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/admin/users",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get user by id",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"status\" : \"ACTIVE\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/admin/users/40e482c4-1379-4451-b027-8cfca0c622f4",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "users",
+                "40e482c4-1379-4451-b027-8cfca0c622f4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get all booking",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"bookingId\": \"50ef55b6-e9c8-4fb2-a7c6-955e742ed626\",\r\n  \"rating\": 5,\r\n  \"comment\": \"Very good service\"\r\n}"
+            },
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/admin/bookings",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "bookings"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get all Category",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/admin/categories",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "post Category Copy",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Janitor\",\r\n    \"slug\": \"Janitor\",\r\n    \"icon\": \"🪚\",\r\n    \"description\": \"Custom woodworking, furniture repair, and framing\",\r\n    \"createdAt\": \"2026-07-07T10:30:28.593Z\",\r\n    \"updatedAt\": \"2026-07-07T10:30:28.593Z\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://fixitnow-xi.vercel.app/api/admin/categories",
+              "protocol": "https",
+              "host": [
+                "fixitnow-xi",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Route not found",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Test 5\",\r\n    \"email\": \"test5@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"phone\": \"+8801601403874\",\r\n    \"role\": \"ADMIN\",\r\n    \"profileImage\": \"www.youtube.com\",\r\n    \"address\": \"Malotinagur, Bogura\"\r\n}"
+        },
+        "url": {
+          "raw": "https://fixitnow-xi.vercel.app/api/users/register/dr",
+          "protocol": "https",
+          "host": [
+            "fixitnow-xi",
+            "vercel",
+            "app"
+          ],
+          "path": [
+            "api",
+            "users",
+            "register",
+            "dr"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
