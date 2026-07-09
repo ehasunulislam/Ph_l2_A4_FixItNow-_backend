@@ -59,9 +59,26 @@ const getAllReviewFromDB = async() => {
   });
 
   return review
+};
+
+
+
+// get all of my reviews
+const getAllReviewsWithLoginUser = async(userId: string) => {
+  const reviews = await prisma.review.findMany({
+    where: {
+      customerId: userId
+    },
+    orderBy: {
+      createdAt: "desc"
+    }
+  });
+
+  return reviews
 }
 
 export const reviewService = {
   createReviewIntoDB,
-  getAllReviewFromDB
+  getAllReviewFromDB,
+  getAllReviewsWithLoginUser
 };

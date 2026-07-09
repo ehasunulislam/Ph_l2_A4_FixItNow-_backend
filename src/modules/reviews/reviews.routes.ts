@@ -13,4 +13,8 @@ router.post("/", authMiddlware.auth(UserRole.CUSTOMER), reviewController.createR
 // get all review
 router.get("/", reviewController.getAllReview);
 
+
+// get all of my reviews
+router.get("/my-reviews", authMiddlware.auth("CUSTOMER") ,reviewController.getAllReviewsWithLoginUser);
+
 export const reviewRoutes = router;

@@ -29,9 +29,25 @@ const getAllReview = catchAsync(async (req: Request, res: Response, next: NextFu
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
-    message: "Category deleted successfully",
+    message: "show all reviews successfully",
     data: {
       reviews
+    }
+  });
+})
+
+// get review with login user
+const getAllReviewsWithLoginUser = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+  const id = req.user?.id as  string;
+
+  const review = await reviewService.getAllReviewsWithLoginUser(id);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "show all reviwes with logged in user successfully",
+    data: {
+      review
     }
   });
 })
@@ -39,5 +55,6 @@ const getAllReview = catchAsync(async (req: Request, res: Response, next: NextFu
 
 export const reviewController = {
   createReview,
-  getAllReview
+  getAllReview,
+  getAllReviewsWithLoginUser
 };
