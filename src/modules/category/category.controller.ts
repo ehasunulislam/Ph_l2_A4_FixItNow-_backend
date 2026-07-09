@@ -4,7 +4,7 @@ import { CategorySergvice } from "./category.service";
 import { sendResponse } from "../../utils/sedndResponse";
 import httpStatus from "http-status";
 
-
+// create category
 const createCategory = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
     const category = await CategorySergvice.createCategoryIntoDB(req.body);
 
@@ -18,6 +18,8 @@ const createCategory = catchAsync(async(req: Request, res: Response, next: NextF
     });
 });
 
+
+// get all category
 const getAllCategories = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
 
@@ -34,6 +36,8 @@ const getAllCategories = catchAsync(
   }
 );
 
+
+// update category
 const updateCategory = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
 
@@ -50,7 +54,7 @@ const updateCategory = catchAsync(async (req: Request, res: Response, next: Next
   }
 );
 
-
+// delete category
 const deleteCategory = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
 

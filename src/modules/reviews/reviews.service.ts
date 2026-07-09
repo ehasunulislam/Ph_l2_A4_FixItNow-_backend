@@ -3,6 +3,8 @@ import { AppError } from "../../errors/AppError";
 import { prisma } from "../../lib/prisma";
 import { ICreateReviewPayload } from "./reviews.interface";
 
+
+// create review
 const createReviewIntoDB = async (userId: string, payload: ICreateReviewPayload) => {
   const { bookingId, rating, comment } = payload;
 
@@ -47,6 +49,19 @@ const createReviewIntoDB = async (userId: string, payload: ICreateReviewPayload)
   return review;
 };
 
+
+// get all review
+const getAllReviewFromDB = async() => {
+  const review = await prisma.review.findMany({
+    orderBy: {
+      createdAt: "desc"
+    }
+  });
+
+  return review
+}
+
 export const reviewService = {
   createReviewIntoDB,
+  getAllReviewFromDB
 };
