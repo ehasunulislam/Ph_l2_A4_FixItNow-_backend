@@ -197,90 +197,101 @@ npm run dev
 
 ## 🔐 Authentication
 
-| Method | Endpoint |
-|----------|----------------|
-| POST | `/api/auth/register` |
-| POST | `/api/auth/login` |
-| GET | `/api/auth/me` |
-| POST | `/api/auth/refresh-token` |
-
----
-
-## 📂 Categories
-
-| Method | Endpoint |
-|----------|----------------|
-| GET | `/api/categories` |
-
----
-
-## 🛠️ Services
-
-| Method | Endpoint |
-|----------|----------------|
-| GET | `/api/services` |
-| POST | `/api/services` |
-| PATCH | `/api/services/:id` |
-| DELETE | `/api/services/:id` |
+| Method | Endpoint | Description |
+|--------|------------------------------|--------------------------------------------|
+| POST | `/api/auth/register` | Register a new user (Customer / Technician) |
+| POST | `/api/auth/login` | Login user and return JWT |
+| GET | `/api/auth/me` | Get current authenticated user |
+| POST | `/api/auth/refresh-token` | Generate a new access token |
 
 ---
 
 ## 👨‍🔧 Technician
 
-| Method | Endpoint |
-|----------|----------------|
-| GET | `/api/technician` |
-| GET | `/api/technician/:id` |
-| GET | `/api/technician/profile` |
-| PUT | `/api/technician/profile` |
-| POST | `/api/technician/availability` |
-| GET | `/api/technician/availability` |
-| PUT | `/api/technician/availability/:id` |
-| DELETE | `/api/technician/availability/:id` |
-| GET | `/api/technician/bookings` |
-| PATCH | `/api/technician/:id/status` |
+| Method | Endpoint | Description |
+|--------|------------------------------------|-------------------------------------------|
+| GET | `/api/technician` | Get all technicians |
+| GET | `/api/technician/:id` | Get technician details by ID |
+| GET | `/api/technician/profile` | Get logged-in technician profile |
+| PUT | `/api/technician/profile` | Update technician profile |
+| GET | `/api/technician/bookings` | Get technician bookings |
+| PATCH | `/api/technician/:id/status` | Update booking status (Accept / Decline / Complete) |
 
 ---
 
-## 📅 Bookings
+## 📅 Availability
 
-| Method | Endpoint |
-|----------|----------------|
-| POST | `/api/bookings` |
-| GET | `/api/bookings` |
-| GET | `/api/bookings/:id` |
+| Method | Endpoint | Description |
+|--------|------------------------------------------|--------------------------------|
+| POST | `/api/technician/availability` | Create availability slot |
+| GET | `/api/technician/availability` | Get my availability |
+| PUT | `/api/technician/availability/:id` | Update availability |
+| DELETE | `/api/technician/availability/:id` | Delete availability |
+
+---
+
+## 📂 Categories
+
+| Method | Endpoint | Description |
+|--------|-----------------------------|-------------------------|
+| GET | `/api/categories` | Get all categories |
+| POST | `/api/categories` | Create category (Admin) |
+| PATCH | `/api/categories/:id` | Update category (Admin) |
+| DELETE | `/api/categories/:id` | Delete category (Admin) |
+
+---
+
+## 🛠️ Services
+
+| Method | Endpoint | Description |
+|--------|----------------------------|----------------------------|
+| GET | `/api/services` | Get all services |
+| POST | `/api/services` | Create a new service |
+| PATCH | `/api/services/:id` | Update service |
+| DELETE | `/api/services/:id` | Delete service |
+
+---
+
+## 📖 Bookings
+
+| Method | Endpoint | Description |
+|--------|-----------------------------|-----------------------------|
+| POST | `/api/bookings` | Create a booking |
+| GET | `/api/bookings` | Get logged-in customer's bookings |
+| GET | `/api/bookings/:id` | Get booking details |
 
 ---
 
 ## 💳 Payments
 
-| Method | Endpoint |
-|----------|----------------|
-| POST | `/api/payments/create` |
-| POST | `/api/payments/confirm` |
-| GET | `/api/payments` |
-| GET | `/api/payments/:id` |
+| Method | Endpoint | Description |
+|--------|----------------------------------|---------------------------------------|
+| POST | `/api/payments/create` | Create Stripe payment |
+| POST | `/api/payments/confirm` | Confirm payment |
+| GET | `/api/payments` | Get payment history |
+| GET | `/api/payments/:id` | Get payment details |
 
 ---
 
 ## ⭐ Reviews
 
-| Method | Endpoint |
-|----------|----------------|
-| POST | `/api/reviews` |
+| Method | Endpoint | Description |
+|--------|----------------------------------|--------------------------------|
+| POST | `/api/reviews` | Create a review |
+| GET | `/api/reviews` | Get all reviews |
+| GET | `/api/reviews/my-reviews` | Get logged-in customer's reviews |
 
 ---
 
 ## 🛡️ Admin
 
-| Method | Endpoint |
-|----------|----------------|
-| GET | `/api/admin/users` |
-| PATCH | `/api/admin/users/:id` |
-| GET | `/api/admin/bookings` |
-| GET | `/api/admin/categories` |
-| POST | `/api/admin/categories` |
-
+| Method | Endpoint | Description |
+|--------|-----------------------------------|--------------------------------|
+| GET | `/api/admin/users` | Get all users |
+| PATCH | `/api/admin/users/:id` | Update user status (Ban / Unban) |
+| GET | `/api/admin/bookings` | Get all bookings |
+| GET | `/api/admin/categories` | Get all categories |
+| POST | `/api/admin/categories` | Create a category |
 ---
 
 # 🔐 User Roles
