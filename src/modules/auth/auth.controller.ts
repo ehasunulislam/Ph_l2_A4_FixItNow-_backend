@@ -15,15 +15,15 @@ const createUser = catchAsync(
 
     res.cookie("accessableToken", accessToken, {
       httpOnly: true,
-      secure: true,
-      sameSite: "none",
+      secure: false,
+      sameSite: "lax",
       maxAge: 1000 * 60 * 60 * 24,
     });
 
     res.cookie("refreshableToken", refreshToken, {
       httpOnly: true,
-      secure: true,
-      sameSite: "none",
+      secure: false,
+      sameSite: "lax",
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
 
