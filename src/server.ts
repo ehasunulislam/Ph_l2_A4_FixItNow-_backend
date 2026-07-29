@@ -10,7 +10,7 @@ async function main() {
         console.log("connected to the datebase successfully");
 
         app.listen(PORT, () => {
-            console.log(`server is running on ${PORT}`)
+            console.log(`server is running on http://localhost:${PORT}`)
         })
     }
     catch(err) {

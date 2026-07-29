@@ -5,24 +5,42 @@ import { sendResponse } from "../../utils/sedndResponse";
 import httpStatus from "http-status";
 
 
-
-const createUser = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+// create use for register 
+const createUser = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
     const payload = req.body;
 
-    const user = await authService.createUserFromDB(payload);
+    const { user, accessToken, refreshToken } =
+      await authService.createUserFromDB(payload);
+
+    res.cookie("accessableToken", accessToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      maxAge: 1000 * 60 * 60 * 24,
+    });
+
+    res.cookie("refreshableToken", refreshToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+    });
 
     sendResponse(res, {
       success: true,
       statusCode: httpStatus.CREATED,
       message: "User registered successfully",
       data: {
-        user
+        user,
+        accessToken,
+        refreshToken,
       },
     });
-  },
+  }
 );
 
-
+// login user 
 const loginUser = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
     const payload = req.body;
 
@@ -54,7 +72,7 @@ const loginUser = catchAsync(async(req: Request, res: Response, next: NextFuncti
 });
 
 
-
+// get my profile 
 const getMyProfile = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const result = await authService.getProfileFromDB(req.user?.id as string);
@@ -71,7 +89,7 @@ const getMyProfile = catchAsync(
 );
 
 
-
+// get new accessToken 
 const newAccessToken = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
     const refreshToken = req.cookies.refreshableToken;
 

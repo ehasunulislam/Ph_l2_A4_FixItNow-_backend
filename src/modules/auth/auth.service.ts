@@ -26,7 +26,6 @@ const createUserFromDB = async (payload: IUserRegisterPayload) => {
   );
 
   const user = await prisma.$transaction(async (tx) => {
-    // create user
     const createdUser = await tx.user.create({
       data: {
         name,
@@ -50,23 +49,45 @@ const createUserFromDB = async (payload: IUserRegisterPayload) => {
     }
 
     const result = await tx.user.findUniqueOrThrow({
-        where: {
-            id: createdUser.id
-        },
-        omit: {
-            password: true
-        },
-        include: {
-            technicianProfile: true
-        }
-    })
+      where: {
+        id: createdUser.id,
+      },
+      omit: {
+        password: true,
+      },
+      include: {
+        technicianProfile: true,
+      },
+    });
 
     return result;
   });
 
-  return user;
-};
+  const jwtPayload = {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+  };
 
+  const accessToken = jwtUtils.createToken(
+    jwtPayload,
+    config.jwt_access_secret,
+    config.jwt_access_expires_in as SignOptions
+  );
+
+  const refreshToken = jwtUtils.createToken(
+    jwtPayload,
+    config.jwt_refresh_secret,
+    config.jwt_refresh_expires_in as SignOptions
+  );
+
+  return {
+    user,
+    accessToken,
+    refreshToken,
+  };
+};
 
 
 // post of login user
@@ -109,7 +130,7 @@ const loginUserFromDB = async(payload: ILoginUser) => {
     )
 
     return {
-        accessToken, refreshToken
+      accessToken, refreshToken
     }
 }
 
