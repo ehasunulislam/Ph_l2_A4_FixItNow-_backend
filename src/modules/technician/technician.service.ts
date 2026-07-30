@@ -97,18 +97,20 @@ const getSingleTechnicianProfileByIdFromDB = async (userId: string) => {
         },
       },
 
-      reviews: {
+     reviews: {
         include: {
-          customer: {
+            customer: {
             omit: {
-              password: true,
+                password: true,
             },
-          },
+            },
+
+            booking: true,
         },
         orderBy: {
-          createdAt: "desc",
+            createdAt: "desc",
         },
-      },
+    },
     },
   });
 };

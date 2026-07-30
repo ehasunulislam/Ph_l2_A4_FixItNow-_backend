@@ -1,9 +1,10 @@
 import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sedndResponse";
 import { adminService } from "./admin.service";
+import { NextFunction, Request, Response } from "express";
 
 // get all uer 
-const getAllUsers = catchAsync(async (req, res) => {
+const getAllUsers = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
   const result = await adminService.getAllUsersFromDB();
 
   sendResponse(res, {
@@ -15,7 +16,7 @@ const getAllUsers = catchAsync(async (req, res) => {
 });
 
 // update status
-const updateUserStatus = catchAsync(async (req, res) => {
+const updateUserStatus = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
     const id = req.params.id as string;
     const payload = req.body;
 
@@ -33,7 +34,7 @@ const updateUserStatus = catchAsync(async (req, res) => {
 
 
 //  get all booking
-const getAllBookings = catchAsync(async (req, res) => {
+const getAllBookings = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
   const result = await adminService.getAllBookingsFromDB();
 
   sendResponse(res, {
