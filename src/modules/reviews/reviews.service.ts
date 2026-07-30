@@ -5,7 +5,7 @@ import { ICreateReviewPayload } from "./reviews.interface";
 
 
 // create review
-const createReviewIntoDB = async (userId: string, payload: ICreateReviewPayload) => {
+const createReviewIntoDB = async ( userId: string, payload: ICreateReviewPayload) => {
   const { bookingId, rating, comment } = payload;
 
   const booking = await prisma.booking.findUnique({
@@ -36,19 +36,48 @@ const createReviewIntoDB = async (userId: string, payload: ICreateReviewPayload)
     throw new AppError(400, "Review already submitted");
   }
 
-  const review = await prisma.review.create({
-    data: {
-      bookingId,
-      customerId: userId,
-      technicianProfileId: booking.technicianProfileId,
-      rating,
-      comment,
-    },
+  const review = await prisma.$transaction(async (tx) => {
+
+    // 1. Create review
+    const createdReview = await tx.review.create({
+      data: {
+        bookingId,
+        customerId: userId,
+        technicianProfileId: booking.technicianProfileId,
+        rating,
+        comment,
+      },
+    });
+
+    // 2. Calculate average rating
+    const stats = await tx.review.aggregate({
+      where: {
+        technicianProfileId: booking.technicianProfileId,
+      },
+      _avg: {
+        rating: true,
+      },
+      _count: {
+        rating: true,
+      },
+    });
+
+    // 3. Update technician profile
+    await tx.technicianProfile.update({
+      where: {
+        id: booking.technicianProfileId,
+      },
+      data: {
+        averageRating: Number(stats._avg.rating ?? 0),
+        totalReviews: stats._count.rating,
+      },
+    });
+
+    return createdReview;
   });
 
   return review;
 };
-
 
 // get all review
 const getAllReviewFromDB = async() => {

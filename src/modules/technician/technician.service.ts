@@ -73,27 +73,45 @@ const getAllTechnicianProfileFromDB = async(filter: any) => {
 }
 
 // get the technician with id
-const getSingleTechnicianProfileByIdFromDB  = async(userId: string) => {
-    const technician = await prisma.technicianProfile.findUnique({
-        where: {
-            id: userId
+const getSingleTechnicianProfileByIdFromDB = async (userId: string) => {
+  return await prisma.technicianProfile.findUnique({
+    where: {
+       userId,
+    },
+    include: {
+      user: {
+        omit: {
+          password: true,
         },
-        include: {
-            user: {
-                omit: {
-                    password: true
-                }
-            },
-            services: {
-                include: {
-                    category: true,
-                }
-            }
-        },
-    });
+      },
 
-    return technician
-}
+      services: {
+        include: {
+          category: true,
+        },
+      },
+
+      availability: {
+        orderBy: {
+          date: "asc",
+        },
+      },
+
+      reviews: {
+        include: {
+          customer: {
+            omit: {
+              password: true,
+            },
+          },
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+      },
+    },
+  });
+};
 
 
 // get the technician's all booking 

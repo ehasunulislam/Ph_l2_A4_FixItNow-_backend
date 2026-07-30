@@ -44,9 +44,7 @@ const getSingleTechnicianProfileById = catchAsync(async(req: Request, res: Respo
       success: true,
       statusCode: httpStatus.OK,
       message: "Technician profile retrieved successfully",
-      data: {
-        getSIngleProfile
-      },
+      data: getSIngleProfile,
     });
 });
 
