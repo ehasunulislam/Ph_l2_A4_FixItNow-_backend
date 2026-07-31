@@ -39,7 +39,7 @@ app.use("/api/auth", authRouter);
 
 // technician routers
 app.use("/api/technician", technicianRouter);
-app.use("/api/technician", availabilityRouter);
+app.use("/api/technicians", availabilityRouter);
 
 
 // category

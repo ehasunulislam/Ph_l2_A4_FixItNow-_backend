@@ -125,7 +125,11 @@ const updateAvailabilityFromDB = async ( userId: string, availabilityId: string,
     where: {
       id: availabilityId,
     },
-    data: payload,
+    data: {
+      date: new Date(payload.date),
+      startTime: payload.startTime,
+      endTime: payload.endTime,
+    },
   });
 };
 
