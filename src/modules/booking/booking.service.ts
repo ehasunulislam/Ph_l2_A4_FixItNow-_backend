@@ -44,7 +44,7 @@ const createBookingIntoDB = async(userId: string, payload: IBookingPayload) => {
             serviceId: service.id,
             availabilityId: availability.id,
 
-            bookingDate: payload.bookingDate,
+            bookingDate: availability.date,
             address: payload.address,
             note: payload.note
         },
