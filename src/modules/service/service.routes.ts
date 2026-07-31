@@ -13,6 +13,10 @@ router.post("/", authMiddlware.auth(UserRole.TECHNICIAN), serviceController.crea
 router.get("/", serviceController.getAllServices);
 
 
+// get the single service by id
+router.get("/:id", serviceController.getSingleService);
+
+
 // update the service
 router.patch("/:id", authMiddlware.auth(UserRole.TECHNICIAN), serviceController.updateService);
 

@@ -39,6 +39,21 @@ const getAllServices = catchAsync(async (req: Request, res: Response) => {
   }
 );
 
+
+// get the single service by id
+const getSingleService = catchAsync(async (req, res) => {
+  const id = req.params.id as string
+  const result = await Service.getSingleServiceFromDB(id);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "Service retrieved successfully",
+    data: result,
+  });
+}); 
+
+
 // update the service
 const updateService = catchAsync(async (req, res) => {
   const { id } = req.params;
@@ -74,6 +89,7 @@ const deleteService = catchAsync(async (req, res) => {
 export const serviceController = {
     createService,
     getAllServices,
+    getSingleService,
     updateService,
     deleteService
 }

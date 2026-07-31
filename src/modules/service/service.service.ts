@@ -120,6 +120,23 @@ const getAllServicesFromDB = async (query: IServiceQuery) => {
               password: true,
             },
           },
+
+          availability: {
+            where: {
+              isBooked: false,
+              date: {
+                gte: new Date(), 
+              },
+            },
+            orderBy: [
+              {
+                date: "asc",
+              },
+              {
+                startTime: "asc",
+              },
+            ],
+          },
         },
       },
     },
@@ -140,6 +157,39 @@ const getAllServicesFromDB = async (query: IServiceQuery) => {
     },
     data: services,
   };
+};
+
+
+// get the single service by id 
+const getSingleServiceFromDB = async (id: string) => {
+  return await prisma.service.findUnique({
+    where: {
+      id,
+    },
+
+    include: {
+      category: true,
+
+      technicianProfile: {
+        include: {
+          user: {
+            omit: {
+              password: true,
+            },
+          },
+
+          availability: {
+            where: {
+              isBooked: false,
+            },
+            orderBy: {
+              date: "asc",
+            },
+          },
+        },
+      },
+    },
+  });
 };
 
 
@@ -205,6 +255,7 @@ const deleteServiceFromDB = async (serviceId: string) => {
 export const Service = {
     createServiceFromDB,
     getAllServicesFromDB,
+    getSingleServiceFromDB,
     updateServiceFromDB,
     deleteServiceFromDB
 }
