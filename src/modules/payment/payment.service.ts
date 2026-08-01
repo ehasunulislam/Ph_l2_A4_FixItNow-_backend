@@ -65,7 +65,7 @@ const createPaymentIntentIntoDB = async(userId: string, payload: ICreatePaymentP
         },
 
         success_url: `${config.app_url}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${config.app_url}/payments?success=false`,
+        cancel_url: `${config.app_url}/payment/cancel`,
     });
 
     return {
