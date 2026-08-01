@@ -54,17 +54,18 @@ const createBookingIntoDB = async(userId: string, payload: IBookingPayload) => {
                 include: {
                     user: {
                         omit: {
-                            password: true
+                          password: true
                         }
                     }
                 }
             },
             service: {
                 include: {
-                    category: true
+                  category: true
                 }
             },
-            availability: true
+            availability: true,
+            review: true
         }
     });
 
@@ -99,6 +100,7 @@ const getMyBookingsFromDB = async (userId: string) => {
         },
       },
       availability: true,
+      review: true
     },
     orderBy: {
       createdAt: "desc",
