@@ -1,4 +1,4 @@
-# 🚀 FixItNow - Home Service Marketplace Backend API
+# 🚀 FixItNow - Home Service Marketplace Backend 
 
 A robust and scalable RESTful API for **FixItNow**, a home service marketplace where customers can book services, technicians can manage bookings and availability, and administrators can manage the platform.
 
